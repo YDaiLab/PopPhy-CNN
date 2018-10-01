@@ -17,7 +17,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Prepare Data")
 parser.add_argument("-m", "--method", default="CV", help="CV or Holdout method.") #Holdout method TBI
-parser.add_argument("-d", "--dataset", default="Cirrhosis", help="Name of dataset in data folder.")
+parser.add_argument("-d", "--data_set", default="Cirrhosis", help="Name of dataset in data folder.")
 parser.add_argument("-n", "--splits", default=10, type=int, help="Number of cross validated splits.")
 parser.add_argument("-s", "--sets", default=10, type=int, help="Number of datasets to generate")
 args = parser.parse_args()
