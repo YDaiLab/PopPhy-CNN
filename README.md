@@ -10,7 +10,8 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 
 ### Prerequisites
   - Python 2.7.14
-  - Libraries: `pip install theano numpy pandas joblib xmltodict untangle sklearn network`
+  - Tensorflow
+  - Libraries: `pip install numpy pandas joblib xmltodict untangle sklearn network`
   
 ### To generate 10 times 10-fold cross validation sets for the Cirrhosis dataset:
 
@@ -18,14 +19,14 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 python prepare_data.py -d=Cirrhosis -m=CV -n=10 -s=10
 ``` 
 
-### To train PopPhy-CNN using the generated 10 times 10-fold cross validation Cirrhosis sets for 400 epochs with early stopping of 20 epochs:
+### To train PopPhy-CNN using the generated 10 times 10-fold cross validation Cirrhosis sets:
 ```bash
-python train.py -d=Cirrhosis -m=CV -n=10 -s=10 -e=400 -p=20
+python train_PopPhy.py --data_set=Cirrhosis --num_sets=10 --num_cv=10 
 ```
 
-### To extract feature importance scores from the learned models:
+### To extract feature importance scores from the learned models during training:
 ```bash
-python feature_map_analysis -d=Cirrhosis -m=CV -n=10 =s=10
+python train_PopPhy.py --data_set=Cirrhosis --num_sets=10 --num_cv=10 --eval_features=True
 ```
 
 ### To generate files to use for Cytoscape visualization:
