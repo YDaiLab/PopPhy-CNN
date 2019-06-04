@@ -8,10 +8,11 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 
 ## Execution:
 
-### Prerequisites
-  - Python 2.7.14
-  - Tensorflow
-  - Libraries: `pip install numpy pandas joblib xmltodict untangle sklearn network`
+### Import Conda Environment
+
+```bash
+conda env create -f PopPhy.yml
+``` 
   
 ### To generate 10 times 10-fold cross validation sets for the Cirrhosis dataset:
 
