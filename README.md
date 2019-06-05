@@ -12,6 +12,7 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 
 ```bash
 conda env create -f PopPhy.yml
+source activate PopPhy
 ``` 
   
 ### To generate 10 times 10-fold cross validation sets for the Cirrhosis dataset:
