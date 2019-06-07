@@ -8,6 +8,12 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 
 ## Execution:
 
+We provide a python environment which can be imported using the [Conda](https://www.anaconda.com/distribution/) python package manager.
+
+Deep learning models are built using [Tensorflow](https://www.tensorflow.org/). Libraries should be downloaded upon importing the provided environment.
+
+To fully utilize GPUs for faster training of the deep learning models, users will need to be sure that both [CUDA](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN](https://developer.nvidia.com/cudnn) are properly installed.
+
 ### Import Conda Environment
 
 ```bash
