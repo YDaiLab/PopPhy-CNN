@@ -16,6 +16,12 @@ To fully utilize GPUs for faster training of the deep learning models, users wil
 
 Other dependencies should be downloaded upon importing the provided environment.
 
+### Clone Repository
+```bash
+git clone https://github.com/YDaiLab/PopPhy-CNN.git
+cd PopPhy-CNN
+```
+
 ### Import Conda Environment
 
 ```bash
@@ -26,6 +32,7 @@ source activate PopPhy
 ### To generate 10 times 10-fold cross validation sets for the Cirrhosis dataset:
 
 ```bash
+cd src
 python prepare_data.py -d=Cirrhosis -m=CV -n=10 -s=10
 ``` 
 
