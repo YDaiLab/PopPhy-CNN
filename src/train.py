@@ -77,7 +77,6 @@ def train_PopPhy():
 	path = "../data/" + dataset
 
 	my_maps, _, _, _, tree_features, labels, label_set, g, feature_df = prepare_data(path, config)
-	print(g.get_node_by_name("_family"))
 
 	num_class = len(np.unique(labels))
 	if num_class == 2:
@@ -172,8 +171,8 @@ def train_PopPhy():
 
 			if fold + run == 0:
 				print(popphy_model.model.summary())	
+				print("\n\n Run\tFold\t%s" % (metric))
 
-			print("\n# %s values for run %d fold %d:" % (metric, run, fold))
 			popphy_model.train(train, train_weights)					
 			preds, stats = popphy_model.test(test)
 			if num_class == 2:
@@ -182,12 +181,8 @@ def train_PopPhy():
 			stat_df.loc["Precision"]["Run_" + str(run) + "_CV_" + str(fold)]=stats["Precision"]
 			stat_df.loc["Recall"]["Run_" + str(run) + "_CV_" + str(fold)]=stats["Recall"]
 			stat_df.loc["F1"]["Run_" + str(run) + "_CV_" + str(fold)]=stats["F1"]
-			sys.stdout.write("")
-			if metric == "AUC":
-				print("# %.3f\t%.3f" % (stats["AUC"], stat_df.loc["AUC"].mean(axis=0)))
-			if metric == "MCC":
-				print("# %.3f\t%.3f" % (stats["MCC"], stat_df.loc["MCC"].mean(axis=0)))
-			
+			print("# %d\t%d\t%.3f" % (run, fold, stats[metric]))
+	
 			scores = popphy_model.get_feature_scores(train, g, label_set, tree_features, config)
 			for l in range(len(label_set)):
 				score_list = scores[:,l]
@@ -202,15 +197,41 @@ def train_PopPhy():
 		# Save metric dataframes as files
 		#####################################################################
 		
+	print("\nAggregating evaluations...")
 	stat_df.to_csv(result_path + "/prediction_evaluation/results_popphy.tsv", sep="\t")
 	for l in label_set:
 		feature_scores[l].to_csv(result_path + "/feature_evaluation/" + str(l) + "_scores.csv")
 
+	print(stat_df.mean(1))
+	print("\nGenerating taxa scores and generating network file...")
 	network, tree_scores = generate_network(g, feature_scores, label_set)
 	tree_scores.to_csv(result_path + "/tree_scores.csv")
 	
 	with open(result_path + '/network.json', 'w') as json_file:
 		json.dump(network, json_file, sort_keys=True, indent=4, separators=(',', ': '))
+
+	#####################################################################
+	# Build Single Final Predictive Model
+	#####################################################################
+	final_x = MinMaxScaler().fit_transform(my_maps.reshape(-1, tree_row * tree_col)).reshape(-1,tree_row, tree_col)
+	train = [final_x, labels_oh]
+
+	train_weights = []
+
+	for l in np.unique(labels):
+		a = float(len(labels))
+		b = 2.0 * float((np.sum(labels==l)))
+		c_prob[int(l)] = a/b
+
+	c_prob = np.array(c_prob).reshape(-1)
+
+	for l in np.argmax(labels_oh, 1):
+		train_weights.append(c_prob[int(l)])
+	train_weights = np.array(train_weights)
+	print("Building final predictive model...")
+	popphy_model = PopPhyCNN((tree_row, tree_col), num_class, config)
+	popphy_model.train(train, train_weights)					
+	popphy_model.model.save(result_path + '/PopPhy-CNN.h5')
 
 
 if __name__ == "__main__":
