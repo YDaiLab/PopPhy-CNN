@@ -20,7 +20,7 @@ config = get_config()
 warnings.filterwarnings("ignore")
 np.set_printoptions(threshold=np.nan)
 
-def train_PopPhy(config, save_dir = None):
+def train_PopPhy():
 
 	#####################################################################
 	# Read in Config File
