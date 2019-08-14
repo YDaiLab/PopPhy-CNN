@@ -1,0 +1,135 @@
+[ {
+  "format_version" : "1.0",
+  "generated_by" : "cytoscape-3.7.1",
+  "target_cytoscapejs_version" : "~2.1",
+  "title" : "PopPhy",
+  "style" : [ {
+    "selector" : "node",
+    "css" : {
+      "background-color" : "rgb(137,208,245)",
+      "font-size" : 12,
+      "color" : "rgb(0,0,0)",
+      "text-opacity" : 1.0,
+      "text-valign" : "center",
+      "text-halign" : "center",
+      "border-opacity" : 1.0,
+      "border-width" : 0.0,
+      "shape" : "roundrectangle",
+      "font-family" : "SansSerif",
+      "font-weight" : "normal",
+      "border-color" : "rgb(204,204,204)",
+      "background-opacity" : 1.0,
+      "height" : 35.0,
+      "width" : 75.0,
+      "content" : "data(name)"
+    }
+  }, {
+    "selector" : "node[score > 2]",
+    "css" : {
+      "background-color" : "rgb(178,24,43)"
+    }
+  }, {
+    "selector" : "node[score = 2]",
+    "css" : {
+      "background-color" : "rgb(0,153,51)"
+    }
+  }, {
+    "selector" : "node[score > 1][score < 2]",
+    "css" : {
+      "background-color" : "mapData(score,1,2,rgb(0,153,0),rgb(0,153,51))"
+    }
+  }, {
+    "selector" : "node[score > 0][score < 1]",
+    "css" : {
+      "background-color" : "mapData(score,0,1,rgb(204,204,204),rgb(0,153,0))"
+    }
+  }, {
+    "selector" : "node[score > -1][score < 0]",
+    "css" : {
+      "background-color" : "mapData(score,-1,0,rgb(204,0,0),rgb(204,204,204))"
+    }
+  }, {
+    "selector" : "node[score > -2][score < -1]",
+    "css" : {
+      "background-color" : "mapData(score,-2,-1,rgb(204,0,0),rgb(204,0,0))"
+    }
+  }, {
+    "selector" : "node[score = -2]",
+    "css" : {
+      "background-color" : "rgb(204,0,0)"
+    }
+  }, {
+    "selector" : "node[score < -2]",
+    "css" : {
+      "background-color" : "rgb(33,102,172)"
+    }
+  }, {
+    "selector" : "node:selected",
+    "css" : {
+      "background-color" : "rgb(255,255,0)"
+    }
+  }, {
+    "selector" : "edge",
+    "css" : {
+      "source-arrow-color" : "rgb(64,64,64)",
+      "content" : "",
+      "width" : 2.0,
+      "color" : "rgb(0,0,0)",
+      "opacity" : 1.0,
+      "font-size" : 10,
+      "target-arrow-color" : "rgb(64,64,64)",
+      "target-arrow-shape" : "none",
+      "line-style" : "solid",
+      "font-family" : "Dialog",
+      "font-weight" : "normal",
+      "source-arrow-shape" : "none",
+      "line-color" : "rgb(64,64,64)",
+      "text-opacity" : 1.0
+    }
+  }, {
+    "selector" : "edge[score > 2]",
+    "css" : {
+      "width" : 1.0
+    }
+  }, {
+    "selector" : "edge[score = 2]",
+    "css" : {
+      "width" : 30.0
+    }
+  }, {
+    "selector" : "edge[score > 1][score < 2]",
+    "css" : {
+      "width" : "mapData(score,1,2,30.0,30.0)"
+    }
+  }, {
+    "selector" : "edge[score > 0][score < 1]",
+    "css" : {
+      "width" : "mapData(score,0,1,5.0,30.0)"
+    }
+  }, {
+    "selector" : "edge[score > -1][score < 0]",
+    "css" : {
+      "width" : "mapData(score,-1,0,30.0,5.0)"
+    }
+  }, {
+    "selector" : "edge[score > -2][score < -1]",
+    "css" : {
+      "width" : "mapData(score,-2,-1,30.0,30.0)"
+    }
+  }, {
+    "selector" : "edge[score = -2]",
+    "css" : {
+      "width" : 30.0
+    }
+  }, {
+    "selector" : "edge[score < -2]",
+    "css" : {
+      "width" : 1.0
+    }
+  }, {
+    "selector" : "edge:selected",
+    "css" : {
+      "line-color" : "rgb(255,0,0)"
+    }
+  } ]
+} ]
