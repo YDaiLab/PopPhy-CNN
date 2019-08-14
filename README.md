@@ -10,7 +10,7 @@ PopPhy-CNN,a novel convolutional neural networks (CNN) learning architecture tha
 
 We provide a python environment which can be imported using the [Conda](https://www.anaconda.com/distribution/) python package manager.
 
-Deep learning models are built using [Tensorflow](https://www.tensorflow.org/). PopPhy-CNN was designed using **Tensorflow v1.12.0**.
+Deep learning models are built using [Tensorflow](https://www.tensorflow.org/). PopPhy-CNN has been updated to use **Tensorflow v1.14.0**.
 
 To fully utilize GPUs for faster training of the deep learning models, users will need to be sure that both [CUDA](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN](https://developer.nvidia.com/cudnn) are properly installed.
 
@@ -27,28 +27,31 @@ cd PopPhy-CNN
 ```bash
 conda env create -f PopPhy.yml
 source activate PopPhy
+cd src
 ``` 
   
-### To generate 10 times 10-fold cross validation sets for the Cirrhosis dataset:
+### Set Configuration Parameters:
+
+Edit config.py to customize your PopPhy-CNN execution. Datasets need to be placed in their own folder within the data/ directory. There needs to be an abundance file in which each column is a sample and each row is a taxon structured following the example below:
 
 ```bash
-cd src
-python prepare_data.py -d=Cirrhosis -m=CV -n=10 -s=10
-``` 
-
-### To train PopPhy-CNN using the generated 10 times 10-fold cross validation Cirrhosis sets:
-```bash
-python train_PopPhy.py --data_set=Cirrhosis --num_sets=10 --num_cv=10 
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_graevenitzii
 ```
 
-### To extract feature importance scores from the learned models during training:
+In this example, the taxa is *Actinomyces graevenitzii* and comes from the Bacteria kingdom, Actinobacteria phylum, Actinobacteria class, Actinomycetales order, Actinoycetaceae family, *Actinomyces* genus, and *graevenitzii* species. Note that the 's__' identifier should include the genus and species.
+
+### Run PopPhy-CNN:
+
+Once the configuration file is set, PopPhy-CNN is executed with
+
 ```bash
-python train_PopPhy.py --data_set=Cirrhosis --num_sets=10 --num_cv=10 --eval_features=True
+python train.py
 ```
 
-### To generate files to use for Cytoscape visualization:
-```bash
-python generate_tree_scores.py -d=Cirrhosis
-```
+Results are saved in the results directory under a subdirectory with the same name as the dataset's folder.
+
+### Visualizing the Results
+
+Cytoscape can be used to visualize the results from PopPhy-CNN's analysis. To do so, install and run [Cytoscape](https://cytoscape.org/). In the results timestamped folder, load the file 'network.json' into cytoscape. Then import the Cytoscape style found 'style.xml' found in the 'cytoscape_style' directory. It may also be useful to install the yFiles layouts and visualize the tree using the yFile radial layout.
 
 
