@@ -206,6 +206,14 @@ class Graph:
 				level = 'genus'
 			if lab.iloc[i][level] == "NA":
 				level = 'family'
+			if lab.iloc[i][level] == "NA":
+				level = 'order'
+			if lab.iloc[i][level] == "NA":
+				level = 'class'
+			if lab.iloc[i][level] == "NA":
+				level = 'phylum'
+			if lab.iloc[i][level] == "NA":
+				level = 'kingdom'
 			node = self.get_node_by_name(lab.iloc[i][level])
 			if node == None:
 				node = self.get_node_by_name(lab.iloc[i][level]+"_"+level)
@@ -373,7 +381,6 @@ class Graph:
 					self.delete_node(l, n)
 					deleted += 1
 			
-		
 		features = features_df
 		for i in range(0, len(list(features.index))):
 			found = False

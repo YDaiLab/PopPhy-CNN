@@ -35,15 +35,21 @@ def get_feature_df(features):
 			name =f.split("p__")[1].split("|c__")[0].replace(".","")
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			phylum.append(name)
+			if name != "":
+				phylum.append(name)
+			else:
+				phylum.append("NA")
 		else:
-			phlyum.append("NA")
+			phylum.append("NA")
 			
 		if "c__" in f:
 			name = f.split("c__")[1].split("|o__")[0].replace(".","")
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			cl.append(name)
+			if name != "":
+				cl.append(name)
+			else:
+				cl.append("NA")
 		else:
 			cl.append("NA")
 			
@@ -51,7 +57,10 @@ def get_feature_df(features):
 			name = f.split("o__")[1].split("|f__")[0].replace(".","")
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			order.append(name)
+			if name != "":
+				order.append(name)
+			else:
+				order.append("NA")
 		else:
 			order.append("NA")
 			
@@ -59,7 +68,10 @@ def get_feature_df(features):
 			name = f.split("f__")[1].split("|g__")[0].replace(".","")
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			family.append(name)
+			if name != "":
+				family.append(name)
+			else:
+				family.append("NA")
 		else:
 			family.append("NA")
 			
@@ -67,7 +79,10 @@ def get_feature_df(features):
 			name = f.split("g__")[1].split("|s__")[0].replace(".","")
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			genus.append(name)
+			if name != "":
+				genus.append(name)
+			else:
+				genus.append("NA")
 		else:
 			genus.append("NA")
 			
@@ -75,7 +90,10 @@ def get_feature_df(features):
 			name = f.split("s__")[1]
 			if "_unclassified" in name:
 				name = 'unclassified_' + name.split("_unclassified")[0]
-			species.append(name)
+			if name != "":
+				species.append(name)
+			else:
+				species.append("NA")
 		else:
 			species.append("NA")
 			

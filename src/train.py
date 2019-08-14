@@ -15,6 +15,7 @@ import warnings
 from datetime import datetime
 import webbrowser
 import subprocess
+import json
 
 config = get_config()
 warnings.filterwarnings("ignore")
@@ -76,6 +77,7 @@ def train_PopPhy():
 	path = "../data/" + dataset
 
 	my_maps, _, _, _, tree_features, labels, label_set, g, feature_df = prepare_data(path, config)
+	print(g.get_node_by_name("_family"))
 
 	num_class = len(np.unique(labels))
 	if num_class == 2:
@@ -205,10 +207,10 @@ def train_PopPhy():
 		feature_scores[l].to_csv(result_path + "/feature_evaluation/" + str(l) + "_scores.csv")
 
 	network, tree_scores = generate_network(g, feature_scores, label_set)
-	tree_scores.to_csv(path + "/tree_scores.csv")
-
-	with open(path + '/network.json', 'w') as json_file:
-		json.dump(network, json_file)
+	tree_scores.to_csv(result_path + "/tree_scores.csv")
+	
+	with open(result_path + '/network.json', 'w') as json_file:
+		json.dump(network, json_file, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 if __name__ == "__main__":
